@@ -347,7 +347,8 @@ public protocol BarcodeScannerViewDelegate {
     private func addDetectionAreaView() {
         let halfScreenWidth = UIScreen.main.bounds.width / 2
         let halfScreenHeight = UIScreen.main.bounds.height / 2
-        let width = halfScreenWidth > halfScreenHeight ? halfScreenHeight : halfScreenWidth
+        // Veoci: 90% instead of 50% of the screen so wide barcodes (e.g. PDF_417) fit without holding the phone far away
+        let width = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.9
         let topLeft = CGPoint(x: self.center.x - (width / 2), y: self.center.y - (width / 2))
         let view = UIView(frame: CGRect(x: topLeft.x, y: topLeft.y, width: width, height: width))
         view.backgroundColor = UIColor.clear
